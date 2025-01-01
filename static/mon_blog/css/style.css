@@ -1,0 +1,220 @@
+
+/* Page base.html */
+html, body {
+    height: 100%; /* S'assurer que la hauteur de la page couvre tout l'écran */
+    margin: 0;
+}
+.wrapper {
+    min-height: 100%; /* Faire en sorte que le conteneur principal occupe toute la hauteur */
+    display: flex;
+    flex-direction: column; /* Organise les enfants en colonne */
+}
+main {
+    flex: 1; /* Pousse le footer vers le bas si le contenu est insuffisant */
+}
+/* Bare de navigation */
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.header .bare_navigation{
+    background-color: rgb(53, 144, 111);
+    color: aliceblue;
+}
+.header .bare_navigation a{
+    color: aliceblue;
+}
+.header .icon a{
+    margin: 0 8px;
+    font-size: 25px;
+}
+
+/* Page acceuil */
+/* section */
+.section{
+    margin-top: 20PX;
+    margin-bottom: 50px;
+}
+
+@media (min-width: 1024px){
+    .search_group{
+        height: 50px;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+/* Rechercher des articles */
+@media (min-width: 1024px){
+    .search_group{
+        height: 50px;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+.categories ul{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.categories ul .btn_categorie{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    padding: 5px 25px;
+    margin: 8px;
+    text-transform: uppercase;
+}
+.categories ul .btn_categorie:hover{
+    background-color: rgb(53, 144, 111);
+    border:none;
+    color: aliceblue;
+}
+
+/* Search et articles */
+.groupe{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(53, 144, 111);
+    font-weight: 600;
+}
+.btn_lire{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    padding: 10px 30px;
+}
+.btn_lire:hover{
+    background-color: rgba(85, 220, 171, 0.981);
+    border:none;
+}
+
+@media (min-width: 1024px){
+    .image_article{
+        height: 200px;
+    }
+}
+
+/* Page mes publications */
+.mes_publications{
+    display: grid;
+    grid-template-columns: 300px auto;
+    gap: 20px;
+}
+.sidebar{
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 5px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+.sidebar h4{
+    background-color: rgb(53, 144, 111);
+    color: aliceblue;
+    padding: 8px 0;
+    position: sticky;
+    top: 0;
+}
+.mes_publications .date_title{
+    display: flex;
+    flex-direction: column;
+
+}
+.mes_publications .date_title .titre{
+    padding: 5px 10px;
+    border-bottom: 1px solid rgb(227, 227, 227);
+    font-size: 0.9rem;
+}
+.mes_publications .date_title .titre:hover{
+    background-color: rgb(207, 242, 229);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.mes_publications .article_publier{
+    display: grid;
+    grid-template-columns: 700px auto;
+    gap: 10px;
+    height: auto;
+}
+.mes_publications .article_publier .sup_modif{
+    margin-bottom: 10px;
+}
+.mes_publications .article_publier .sup_modif button{
+    margin-right: 10px;
+    /* font-size: 1.1rem; */
+}
+.controle_commentaire{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(227, 227, 227);
+    border-bottom: 1px solid rgb(227, 227, 227);
+    height: 300px;
+    overflow-y: auto;
+}
+.controle_commentaire h3, .send_comment{
+    position: sticky;
+    top: 0;
+}
+.controle_commentaire .send_comment{
+    bottom: 0;
+}
+.controle_commentaire h3{
+    top: 0;
+}
+.controle_commentaire .group{
+    display: flex;
+    justify-content: space-between;
+}
+.controle_commentaire .group:hover{
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+.controle_commentaire .group .comment{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sur mobile */
+@media (max-width: 768px){
+    .mes_publications{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .sidebar{
+        height: 300px;
+    }
+    .mes_publications .article_publier{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/*  Sur desktop */
+@media (min-width: 1024px){
+    .detail img{
+        width: 700px;
+    }
+}
+
+/* Footer */
+.footer{
+    background-color: rgba(0, 0, 0, 0.804);
+    color: aliceblue;
+    text-align: center;
+    padding: 20px 0;
+}
+.footer p{
+    margin: 0;
+    font-size: 1.1rem;
+}
+.footer span{
+    color: rgb(53, 144, 111);
+    font-weight: 700;
+}
+.footer a{
+    margin: 0 5px;
+    color: rgb(53, 144, 111);
+    font-size: 18px;
+}

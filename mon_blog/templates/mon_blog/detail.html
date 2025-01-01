@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Detail article {% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <div class="mes_publications">
+              <div class="sidebar">
+                <h4 class="text-center">Meme Categories</h4>
+                <div class="date_title">
+                  {% if article_categorie %}
+                    {% for article_categories in article_categorie %}
+                        {% if article_categories.id != detail_article.id %}
+                            <a href="{% url 'detail' article_categories.slug %}" class="p-2">{{ article_categories.titre }}</a>
+                        {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    <p>Aucun autre article dans la meme categorie</p>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="article_publier">
+                <div class="info_article">
+                  <div class="detail">
+
+                    <!--    Affichage des details d'un article-->
+                    {% if detail_article.image %}
+                      <img src="{{ detail_article.image.url  }}" alt="" style="height: 300px;">
+                    {% endif %}
+                    <h5 class="card-title mt-4 mb-2">{{ detail_article.titre }}</h5>
+                    <small class="mb-2" style="color: rgb(53, 144, 111); font-weight: 500;"><i class="bi bi-calendar"></i> {{ detail_article.date_creation }}</small>
+                    <p class="card-text mt-1">{{ detail_article.contenu }}</p>
+
+                     <!--    Affichage et Ajouter des commentaires-->
+                    <div class="controle_commentaire">
+                        {% if commentaires %}
+                            <h3 class="text-center mt-2">Commentaires ({{ commentaires.count }})</h3>
+                            {% for commentaire in commentaires %}
+                              <div class="group mb-2">
+                                <div class="comment">
+                                  <small>Poste le {{ commentaire.date_creation }}</small>
+                                  <label class="mb-3" for="text">{{ commentaire.contenu }}</label>
+                                </div>
+                              </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Auncun commentaire pour l'instant</p>
+                        {% endif %}
+
+                        <!--    Ajouter un nouveau commentaire-->
+                        <div class="formulaire-commentaire">
+                            {% if user.is_authenticated %}
+                            <h5>Ajouter un commentaire</h5>
+                            <form class="input-group mb-3 mt-2" method="post"> {% csrf_token %}
+                                {{ form.contenu }}
+                                <button type="submit" class="btn btn-success">Envoyer</button>
+                            </form>
+                            {% else %}
+                                <h5>Connectez-vous pour ajouter un commentaire</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

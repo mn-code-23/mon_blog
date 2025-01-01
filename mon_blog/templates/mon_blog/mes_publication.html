@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Mes Publications {% endblock %}
+
+{% block content %}
+
+<!-- Mes articles publier -->
+    <section class="section">
+      <div class="container">
+        <div class="mes_publications">
+          <div class="sidebar">
+            <h4 class="text-center">Mes Articles</h4>
+            <div class="date_title">
+              {% if articles_auteur %}
+                {% for articles_auteurs in articles_auteur %}
+                    <a class="titre" href="?slug={{ articles_auteurs.slug }}">{{ articles_auteurs.titre }}</a>
+                {% endfor %}
+                {% else %}
+                <p>Vous n'avez pas encore publié d'articles.</p>
+              {% endif %}
+            </div>
+          </div>
+          <div class="article_publier">
+              {% if mon_article %}
+            <div class="info_article">
+              <div class="sup_modif">
+                <a href="{% url 'edit_article' mon_article.pk %}" type="button" class="btn btn-primary"><i class="bi bi-pencil-square m-2"></i>Modifier l'article</a>
+                <a href="{% url 'delete_Article' mon_article.pk %}" type="button" class="btn btn-danger"><i class="bi bi-trash3-fill m-2"></i>Supprimer l'article</a>
+              </div>
+              <div class="detail">
+                {% if mon_article.image %}
+                  <img src="{{ mon_article.image.url  }}" alt="" style="height: 300px;">
+                {% endif %}
+                <h5 class="card-title mt-4 mb-2">{{ mon_article.titre }}</h5>
+                <small class="mb-2" style="color: rgb(53, 144, 111); font-weight: 500;"><i class="bi bi-calendar"></i> {{ mon_article.date_creation }}</small>
+                <p class="card-text mt-1">{{ mon_article.contenu }}</p>
+                <div class="controle_commentaire">
+                    {% if mon_commentaires %}
+                        <h3 class="text-center mt-2">Commentaires ({{ mon_commentaires.count }})</h3>
+                        {% for mon_commentaire in mon_commentaires %}
+                          <div class="group mb-2">
+                            <div class="comment">
+                              <small>{{ mon_commentaire.date_creation }}</small>
+                              <label for="text">{{ mon_commentaire.contenu }}</label>
+                            </div>
+                            <a href="{% url 'delete_AC' mon_commentaire.pk %}" type="button" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
+                          </div>
+                        {% endfor %}
+                    {% else %}
+                        <h3 class="text-center mt-2">Aucun commentaire</h3>
+                    {% endif %}
+<!--                  <form class="input-group mb-3 mt-2 send_comment" method="post"> {% csrf_token %}-->
+<!--                    {{ form.contenu }}-->
+<!--                    <button class="btn btn-success" type="submit" id="button-addon2">Envoyer</button>-->
+<!--                  </form>-->
+                </div>
+              </div>
+            </div>
+              {% else %}
+                <h5>Aucun article selectionne</h5>
+              {% endif %}
+            <!-- <div class="statistique" style="background-color: beige">
+              <h1>statistique</h1>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

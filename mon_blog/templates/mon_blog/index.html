@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %} Accueil {% endblock %}
+{% block content %}
+<!-- Rechercher des articles -->
+    <section class="section">
+      <div class="container">
+        <div class="search">
+            <form method="get" action="">
+                <div class="input-group mb-3 search_group">
+                    <input type="text" class="form-control" placeholder="Que rechercher vous ?" name="q" value="{{ request.GET.q }}">
+                    <button class="btn btn-success" type="submit">Rechercher</button>
+                </div>
+            </form>
+        </div>
+        <div class="categories">
+          <ul>
+              <li class="btn btn_categorie"><a href="{% url 'index' %}">Tous</a></li>
+              {% for categorie in categories %}
+              <li class="btn btn_categorie"><a href="{% url 'index' %}?categorie={{ categorie.id }}">{{ categorie.name_categorie }}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affichage des articles -->
+    <section class="section">
+      <div class="container">
+        <div class="tous_articles">
+          <div class="row row-cols-1 row-cols-md-4 g-4">
+              {% for article in page_obj %}
+                <div class="col">
+                  <div class="card" >
+                    {% if article.image %}
+                      <img src="{{ article.image.url }}" class="card-img-top image_article" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                      <h5 class="card-title">{{ article.titre }}</h5>
+                      <div class="d-flex groupe">
+                        <small><i class="bi bi-calendar"></i> {{ article.date_creation }}</small>
+                        <small><i class="bi bi-chat"></i> ({{ article.commentaires.count }})</small>
+                      </div>
+                      <p class="card-text">{{ article.contenu|truncatewords:15 }}</p>
+                      <a class="btn btn_lire" href="{% url 'detail' article.slug %}">Lire plus</a>
+                    </div>
+                  </div>
+                </div>
+              {% empty %}
+                <p>Aucun article trouvé.</p>
+              {% endfor%}
+          </div>
+             <!-- Pagination Controls -->
+              <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mt-5">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">Première</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédente</a></li>
+                    {% endif %}
+
+                    <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivante</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Dernière</a></li>
+                    {% endif %}
+                </ul>
+              </nav>
+        </div>
+      </div>
+    </section>
+{% endblock %}

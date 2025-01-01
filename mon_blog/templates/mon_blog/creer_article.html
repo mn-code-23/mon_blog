@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %} Publication d'article {% endblock %}
+
+{% block content %}
+    <!-- Rechercher des articles -->
+    <section class="section">
+      <div class="container">
+        <div class="search">
+          <div class="input-group mb-3 search_group">
+            <input type="text" class="form-control" placeholder="Que rechercher vous ?" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-success" type="button" id="button-addon2">Rechercher</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Mes articles publier -->
+    <section class="section">
+      <div class="container">
+        <div class="mes_publications">
+          <div class="sidebar">
+            <h4 class="text-center">Mes Articles</h4>
+            <div class="date_title">
+              {% if articles_auteur %}
+                {% for articles_auteurs in articles_auteur %}
+                    <a class="titre" href="#">{{ articles_auteurs.titre }}</a>
+                {% endfor %}
+                {% else %}
+                <p>Vous n'avez pas encore publié d'articles.</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Formulaire de publication -->
+          <div class="article_publier">
+            <div class="publication">
+                <h4 class="text-center">Ajouter un article</h4>
+                <form method="post" enctype="multipart/form-data">  {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Titre de l'article</label>
+                        {{ form.titre }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Votre texte</label>
+                        {{ form.contenu }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Choisir un fichier</label>
+                        {{ form.image }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">A quelle catétogie s'inscrit votre article</label>
+                        {{ form.categories }}
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-success" style="width: 100%;">Publier mon article</button>
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="statistique" style="background-color: beige">
+              <h1>statistique</h1>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

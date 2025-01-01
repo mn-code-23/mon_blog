@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} Se connecter {% endblock %}
+
+{% block content %}
+<style>
+    .container .carte{
+            width: 500px;
+            border-radius: 5px;
+            border: 1px solid rgb(219, 214, 214);
+            margin: 50px auto;
+            padding: 30px;
+    }
+    .container .carte a{
+        padding:0px 180px;
+        font-size:1.3rem;
+        text-decoration: underline;
+    }
+</style>
+<!-- Section De connection -->
+      <div class="container">
+        <form class="carte" method="post"> {% csrf_token %}
+        <!-- Message d'erreur -->
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                {{ form.username }}
+                <!-- Message d'erreur -->
+                {% if form.username.errors %}
+                <div class="text-danger">
+                    {{ form.username.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de Passe</label>
+                {{ form.password }}
+                <!-- Message d'erreur -->
+                {% if form.password.errors %}
+                <div class="text-danger">
+                    {{ form.password.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success form-control" type="submit">Se Connecter</button>
+                <a class="text-secondary" href="{% url 'singup_user' %}">S'inscrire</a>
+            </div>
+        </form>
+      </div>
+{% endblock %}
