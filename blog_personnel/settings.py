@@ -162,6 +162,10 @@ AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = 'monblog'
 AWS_S3_REGION_NAME = 'us-east-2'  # Exemple: 'us-east-1'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_OBJECT_OWNERSHIP = 'BucketOwnerPreferred'
+
 AWS_QUERYSTRING_AUTH = False  # Les fichiers sont accessibles publiquement (si nécessaire)
 
 # Optionnel : Configuration pour accélérer le chargement
