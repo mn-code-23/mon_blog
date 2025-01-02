@@ -9,4 +9,6 @@ urlpatterns = [
     path('logout/', logout_user, name="logout_user"),
     path('singup/', singup_user, name="singup_user"),
     path('mon profil/<str:username>/', Mon_profil, name="Mon_profil"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
