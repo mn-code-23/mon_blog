@@ -12,4 +12,4 @@ urlpatterns = [
     path('delarticle/<int:pk>/', delete_Article, name="delete_Article"),
     path('publier-article/', create_edit, name="create_edit"),
     path('edit-article/<int:pk>/', edit_article, name='edit_article'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.DEFAULT_FILE_STORAGE)
